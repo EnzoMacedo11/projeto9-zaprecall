@@ -3,18 +3,33 @@ import Perguntas from "./deck";
 import Pergunta from "./Pergunta";
 import Logo from "./Logo";
 import Footer from "./Footer";
-
+import { useState } from "react";
+import Tela from "./Tela";
 export default function App() {
+  const [telaInicial, setTelaInicial] = useState(true);
+  let contador = 0;
   //console.log(Perguntas)
- 
 
-  return (
-    <ScreenContainer>
-      <Logo />
-      <Pergunta perguntas={Perguntas} />
-      <Footer />
-    </ScreenContainer>
-  );
+  if (telaInicial === true) {
+    return (
+      <ScreenContainer>
+        <Tela setTelaInicial={setTelaInicial} />
+      </ScreenContainer>
+    );
+  }
+
+  if (telaInicial === false) {
+    return (
+      <ScreenContainer>
+        <Logo />
+        {Perguntas.map((pergunta) => {
+          const { id, Q, R } = pergunta;
+          return <Pergunta key={id} id={id} perguntas={Q} respostas={R} contador ={contador} />;
+        })}
+        <Footer contador = {contador}/>
+      </ScreenContainer>
+    );
+  }
 }
 
 const ScreenContainer = styled.div`

@@ -6,21 +6,22 @@ import certo from "./img/icone_certo.png";
 import errado from "./img/icone_erro.png";
 import quase from "./img/icone_quase.png";
 
-let contador = 0;
+//let contador = 0;
 export default function Pergunta(props) {
   const [pergInicial, setPergInicial] = useState(true);
   const [resposta, setResposta] = useState(false);
   const [cor, setCor] = useState("#333333");
   const [style, setStyle] = useState("");
   const [icon, setIcon] = useState(play);
-  const { perguntas } = props;
+  const { perguntas, respostas, id } = props;
+  let {contador} = props
   //console.log(perguntas, "perguntas lista");
   //console.log(props, "pergid");
   //console.log(pergInicial, "pergi");
   //console.log(resposta, "reposta");
   //console.log(contador);
-  console.log(cor);
-  console.log(style);
+  //console.log(cor);
+  //console.log(style);
 
   function virarCarta() {
     setPergInicial(false);
@@ -29,9 +30,12 @@ export default function Pergunta(props) {
     setResposta(true);
   }
   function mostrarPergunta() {
-    contador++;
     setPergInicial(true);
     setResposta(false);
+    if(contador < 8){
+      contador++;
+    }
+  
   }
 
   function vermelha() {
@@ -52,58 +56,48 @@ export default function Pergunta(props) {
 
   if (pergInicial === true)
     return (
-      <>
-        {perguntas.map((perg) => (
-          <CardPergunta
-            onClick={() => virarCarta(perg.id)}
-            key={perg.id}
-            pergunta={perg}
-            style={{ color: `${cor}`, textDecoration: `${style}` }}
-          >
-            <p>Pergunta {perg.id}</p>
-            <img src={icon} />
-          </CardPergunta>
-        ))}
-      </>
+      <CardPergunta
+        style={{ color: `${cor}`, textDecoration: `${style}` }}
+        key={id}
+        onClick={() => virarCarta(id)}
+      >
+        <p>Pergunta {id}</p>
+        <img src={icon} alt="icon"/>
+      </CardPergunta>
     );
   if (resposta === true) {
     return (
       <>
-        {perguntas.map((perg) => (
-          <CardPerguntaAberta key={perg.id} pergunta={perg}>
-            {perg.R}
-            <ContainerBotao>
-              <BotaoVermelho onClick={() => mostrarPergunta(vermelha(perg.id))}>
-                Não Lembrei
-              </BotaoVermelho>
-              <BotaoAmarelo onClick={() => mostrarPergunta(amarela(perg.id))}>
-                Quase Não Lembrei
-              </BotaoAmarelo>
-              <BotaoVerde onClick={() => mostrarPergunta(verde(perg.id))}>
-                Zap!
-              </BotaoVerde>
-            </ContainerBotao>
-          </CardPerguntaAberta>
-        ))}
+        <CardPerguntaAberta key={id}>
+          {respostas}
+          <ContainerBotao>
+            <BotaoVermelho onClick={() => mostrarPergunta(vermelha(id))}>
+              Não Lembrei
+            </BotaoVermelho>
+            <BotaoAmarelo onClick={() => mostrarPergunta(amarela(id))}>
+              Quase Não Lembrei
+            </BotaoAmarelo>
+            <BotaoVerde onClick={() => mostrarPergunta(verde(id))}>
+              Zap!
+            </BotaoVerde>
+          </ContainerBotao>
+        </CardPerguntaAberta>
       </>
     );
   }
+
   if (pergInicial === false) {
     return (
       <>
-        {perguntas.map((perg) => (
-          <CardPerguntaAberta
-            key={perg.id}
-            pergunta={perg}
-            onClick={() => mostrarResposta(perg.id)}
-          >
-            {perg.Q}
-            <img src={virar} />
-          </CardPerguntaAberta>
-        ))}
+        <CardPerguntaAberta key={id} onClick={() => mostrarResposta(id)}>
+          {perguntas}
+          <img src={virar} alt="virar"/>
+        </CardPerguntaAberta>
       </>
     );
   }
+
+  
 }
 
 const CardPergunta = styled.div`

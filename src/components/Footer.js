@@ -1,8 +1,8 @@
 import styled from "styled-components";
-export default function Footer() {
+export default function Footer(props) {
     return (
       <FooterContainer>
-        /8 concluidos
+        {props.contador}/8 concluidos
       </FooterContainer>
     );
   }

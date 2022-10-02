@@ -4,7 +4,7 @@ import styled from "styled-components";
 export default function Logo() {
   return (
     <LogoContainer>
-      <img src={logo} />
+      <img src={logo} alt="logo"/>
       <h1>ZapRecall</h1>
     </LogoContainer>
   );
