@@ -14,7 +14,8 @@ export default function Pergunta(props) {
   const [style, setStyle] = useState("");
   const [icon, setIcon] = useState(play);
   const { perguntas, respostas, id } = props;
-  let {contador} = props
+  let {contador, setContador} = props
+
   //console.log(perguntas, "perguntas lista");
   //console.log(props, "pergid");
   //console.log(pergInicial, "pergi");
@@ -33,7 +34,7 @@ export default function Pergunta(props) {
     setPergInicial(true);
     setResposta(false);
     if(contador < 8){
-      contador++;
+      setContador(contador+1)
     }
   
   }
@@ -89,9 +90,9 @@ export default function Pergunta(props) {
   if (pergInicial === false) {
     return (
       <>
-        <CardPerguntaAberta key={id} onClick={() => mostrarResposta(id)}>
+        <CardPerguntaAberta key={id} >
           {perguntas}
-          <img src={virar} alt="virar"/>
+          <img src={virar} onClick={() => mostrarResposta(id)} alt="virar"/>
         </CardPerguntaAberta>
       </>
     );

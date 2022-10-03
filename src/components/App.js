@@ -7,7 +7,7 @@ import { useState } from "react";
 import Tela from "./Tela";
 export default function App() {
   const [telaInicial, setTelaInicial] = useState(true);
-  let contador = 0;
+  const [contador, setContador] = useState(0);
   //console.log(Perguntas)
 
   if (telaInicial === true) {
@@ -24,7 +24,7 @@ export default function App() {
         <Logo />
         {Perguntas.map((pergunta) => {
           const { id, Q, R } = pergunta;
-          return <Pergunta key={id} id={id} perguntas={Q} respostas={R} contador ={contador} />;
+          return <Pergunta key={id} id={id} perguntas={Q} respostas={R} contador ={contador} setContador={setContador} />;
         })}
         <Footer contador = {contador}/>
       </ScreenContainer>

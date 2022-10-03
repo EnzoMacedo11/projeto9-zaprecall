@@ -30,14 +30,17 @@ const Logo = styled.img`
 `;
 
 const Titulo = styled.h1`
-  font-size: 36px;
-  font-family: "Righteous", cursive;
-  font-weight: 400;
-  line-height: 44.7px;
-  letter-spacing: -1.2%;
-  text-align: center;
-  color: #ffffff;
-  margin-top: 13px; ;
+ font-family: 'Righteous';
+font-style: normal;
+font-weight: 400;
+font-size: 36px;
+line-height: 45px;
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: -0.012em;
+
+color: #FFFFFF
 `;
 
 const Inicio = styled.button`
@@ -47,7 +50,7 @@ const Inicio = styled.button`
   background-color: #ffffff;
   border: solid 1px #d70900;
   border-radius: 5px;
-  box-shadow: 0 4 4 0 #000000 15%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   font-size: 18px;
   font-family: "Recursive", sans-serif;
   font-weight: 400;
